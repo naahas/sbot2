@@ -18,55 +18,27 @@ client.on('ready', () => {
 
 
 function launch() {
-    
-    const channel = client.channels.cache.get('785917648693100605');    
-    var rdimg;
-    var val = 0
-
-    var summon = setInterval(() => {
-        rdimg = Math.floor(Math.random() * 30) + 1;
-        channel.send(`$ma`)
-
-        setTimeout(() => {
-            channel.messages.fetch({ limit: 1 }).then(messages => {
-                const last = messages.first();
-                // console.log(last)
-
-                if(last.embeds.length > 0 && last.author.username == 'Mudae' && last.components[0].components.length > 0) {
-                    const btn = last.components[0].components[0]
-                    var found = checkWish(last.embeds[0].author.name)
-
-                    found.then(result => {
-                        setTimeout(() => {
-                            if(result == true) {
-                                btn.click(last)
-                            }
-                        }, 700);});
-
-                    
-                }
-            }).catch(console.error);
-        }, 1000);
-        val++
-        if(val == 10) clearInterval(summon)
-
-    }, 3000);
+   
+    summonTask()
 
 
     setInterval(() => {
-        resetSummon()
+        console.log('alive')
+    }, 600000);
+
+
+    setInterval(() => {
+        summonTask()
     }, 3600000);
     
 
 }
 
-function resetSummon() {
-    
-    const channel = client.channels.cache.get('785917648693100605');    
+function summonTask() {
     var val = 0
+      const channel = client.channels.cache.get('785917648693100605');    
     
     var summon = setInterval(() => {
-        rdimg = Math.floor(Math.random() * 30) + 1;
         channel.send(`$ma`)
 
         setTimeout(() => {
@@ -120,7 +92,6 @@ async function checkWish(character) {
         console.error('Une erreur est survenue :', error);
     }
 }
-
 
 
 
