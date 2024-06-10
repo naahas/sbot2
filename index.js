@@ -6,8 +6,7 @@ const client = new Client({
 
 // const config = require('./config.json');
 
-const token = process.env.TOKEN2;
-
+const token = process.env.TOKEN2
 
 
 client.on('ready', () => {
@@ -48,22 +47,25 @@ function summonTask() {
 
                 if(last.embeds.length > 0 && last.author.username == 'Mudae' && last.components[0].components.length > 0) {
                     const btn = last.components[0].components[0]
-                    var found = checkWish(last.embeds[0].author.name)
-                   
-                    if(found == true) {
-                        setTimeout(() => {
-                            btn.click(last)
-                        }, 800);
-                    }
-
-                    
+                    checkWish(last.embeds[0].author.name)
+                    .then(found => {
+                        if (found == true) {
+                            setTimeout(() => {
+                                btn.click(last);
+                            }, 700);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Une erreur est survenue lors de la vérification du souhait :', error);
+                    });
                 }
+
             }).catch(console.error);
-        }, 500);
+        }, 800);
         val++
         if(val == 10) clearInterval(summon)
 
-    }, 3000);
+    }, 3500);
 
 }
 
