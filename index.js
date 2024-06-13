@@ -178,8 +178,13 @@ function checkDaily(roll) {
                if(cv.includes('vous __pouvez__')) {
                   channel.send('$rolls')
 
-                  setTimeout(() => {
-                    summonTask(1 , 0 , roll)
+                   setTimeout(() => {
+                    channel.messages.fetch({ limit: 1 }).then(messages => {
+                        const last = messages.first();
+                        if(last.reactions.cache.size > 0) {
+                            summonTask(1 , 0 , roll)
+                        }
+                    }).catch(console.error);
                   }, 1500);
                }
             }
