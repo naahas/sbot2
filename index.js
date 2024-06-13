@@ -52,7 +52,7 @@ function summonTask(auth , auth2 , roll) {
     var claimed = false
     const channel = client.channels.cache.get('785917648693100605');    
     // var rn; 
-    // const cn = ['mario' , 'shrek' , 'kacchan' , 'meruem' , 'son gohan' , 'ash ketchum' , 'majin buu']
+    // const cn = ['mario' , 'akaza' , 'jibril' , 'meruem' , 'son gohan' , 'ash ketchum' , 'majin buu']
 
     if(left > 0) {
         var summon = setInterval(() => {
@@ -78,7 +78,7 @@ function summonTask(auth , auth2 , roll) {
                                         clearInterval(summon)
                                         checkRT(left)
                                     } 
-                                }, 700);
+                                }, 600);
                             }
                         })
                         .catch(error => {
@@ -94,7 +94,7 @@ function summonTask(auth , auth2 , roll) {
             if(val == roll) {
                 clearInterval(summon)
                 setTimeout(() => {
-                    if(auth != 1 && claimed != true) checkDaily(roll)
+                    if(auth != 1 && claimed != true) checkReset(roll)
                 }, 2000);
                 
             }
@@ -137,7 +137,7 @@ function checkRT(left) {
     const channel = client.channels.cache.get('785917648693100605');  
     setTimeout(() => {      
         channel.send('$mu')
-    }, 1000);
+    }, 2000);
     
 
     setTimeout(() => {
@@ -159,10 +159,10 @@ function checkRT(left) {
             }
     
         }).catch(console.error);
-    }, 2400);
+    }, 3500);
 }
 
-function checkDaily(roll) {
+function checkReset(roll) {
     const channel = client.channels.cache.get('785917648693100605');    
     channel.send('$mu')
 
@@ -178,7 +178,7 @@ function checkDaily(roll) {
                if(cv.includes('vous __pouvez__')) {
                   channel.send('$rolls')
 
-                   setTimeout(() => {
+                  setTimeout(() => {
                     channel.messages.fetch({ limit: 1 }).then(messages => {
                         const last = messages.first();
                         if(last.reactions.cache.size > 0) {
